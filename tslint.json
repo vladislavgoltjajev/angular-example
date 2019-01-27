@@ -60,7 +60,7 @@
     "no-empty-interface": true,
     "no-eval": true,
     "no-inferrable-types": [
-      true,
+      false,
       "ignore-params"
     ],
     "no-misused-new": true,
@@ -91,7 +91,8 @@
     "radix": true,
     "semicolon": [
       true,
-      "always"
+      "always",
+      "ignore-bound-class-methods"
     ],
     "triple-equals": [
       true,
@@ -106,6 +107,14 @@
         "property-declaration": "nospace",
         "variable-declaration": "nospace"
       }
+    ],
+    "typedef": [
+      true,
+      "call-signature",
+      "parameter",
+      "member-variable-declaration",
+      "arrow-call-signature",
+      "variable-declaration"
     ],
     "unified-signatures": true,
     "variable-name": false,

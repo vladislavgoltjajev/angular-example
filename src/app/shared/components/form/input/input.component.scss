@@ -1,0 +1,9 @@
+.error-message {
+  color: red;
+}
+
+label.required:after {
+  color: red;
+  content: ' *';
+  display: inline;
+}

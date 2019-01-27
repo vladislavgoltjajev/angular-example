@@ -1,0 +1,12 @@
+<div class="container">
+  <h3 class="mt-4 mb-3">User details</h3>
+  <form *ngIf="user">
+    <app-input
+      label="Name"
+      labelSize="2"
+      inputSize="4"
+      [value]="user.name"
+      readOnly="true">
+    </app-input>
+  </form>
+</div>

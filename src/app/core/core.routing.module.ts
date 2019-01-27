@@ -4,23 +4,10 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 
 const routes: Routes = [
-  {
-    path: 'dashboard',
-    component: DashboardComponent
-  },
-  {
-    path: 'user',
-    loadChildren: '../user/user.module#UserModule'
-  },
-  {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full'
-  },
-  {
-    path: '**',
-    component: NotFoundComponent
-  }
+  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+  {path: 'dashboard', component: DashboardComponent},
+  {path: 'user', loadChildren: '../user/user.module#UserModule'},
+  {path: '**', component: NotFoundComponent}
 ];
 
 @NgModule({

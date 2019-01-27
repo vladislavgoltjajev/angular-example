@@ -1,0 +1,24 @@
+<div class="form-group row">
+  <label
+    [ngClass]="['col-form-label', 'col-' + labelSize, required && !readOnly ? 'required' : '']"
+    *ngIf="label"
+    [attr.for]="id">
+    {{label}}
+  </label>
+  <div [ngClass]="'col-' + (inputSize === 0 ? (12 - labelSize) : inputSize)">
+    <input
+      #inputElement
+      [id]="id"
+      [attr.value]="value"
+      [attr.type]="type"
+      [ngClass]="[readOnly ? 'form-control-plaintext' : 'form-control', showError() ? 'is-invalid' : '']"
+      [readOnly]="readOnly"
+      [attr.placeholder]="placeholder"
+      (change)="onChange($event)"
+      (keyup)="onKeyup($event)"
+      (blur)="onBlur($event)">
+    <div *ngIf="!readOnly && showError() && hasDefinedErrorMessages()" class="invalid-feedback">
+      {{getErrorMessage()}}
+    </div>
+  </div>
+</div>
