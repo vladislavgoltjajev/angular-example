@@ -8,6 +8,7 @@ import {InputComponent} from './components/ui/input/input.component';
 import {SpinnerComponent} from './components/spinner/spinner.component';
 import {ToastrModule} from 'ngx-toastr';
 import {BackButtonComponent} from './components/ui/back-button/back-button.component';
+import {environment} from '../../environments/environment';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import {BackButtonComponent} from './components/ui/back-button/back-button.compo
     ReactiveFormsModule,
     HttpClientModule,
     LoggerModule.forRoot({
-      level: NgxLoggerLevel.TRACE
+      level: !environment.production ? NgxLoggerLevel.TRACE : NgxLoggerLevel.OFF
     }),
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
