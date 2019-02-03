@@ -19,12 +19,12 @@ export class UserService {
     return this._httpService.get<User>('/users/' + userId);
   }
 
-  addUser(user: User): Observable<User> {
-    return this._httpService.post<User>('/users', user);
+  addUser(userData: any): Observable<User> {
+    return this._httpService.post<User>('/users', userData);
   }
 
-  updateUser(userId: number, user: User): Observable<User> {
-    return this._httpService.put<User>('/users/' + userId, user);
+  updateUser(userId: number, userData: any): Observable<User> {
+    return this._httpService.put<User>('/users/' + userId, userData);
   }
 
   deleteUser(userId: number): Observable<object> {

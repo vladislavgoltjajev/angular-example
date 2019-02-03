@@ -1,6 +1,9 @@
 <div class="container">
   <h3 class="mt-4 mb-3">User list</h3>
-  <div class="list-group">
+
+  <app-spinner *ngIf="loading"></app-spinner>
+
+  <div *ngIf="!loading" class="list-group">
     <a
       class="list-group-item list-group-item-action"
       *ngFor="let user of users"
@@ -8,4 +11,6 @@
       {{user.name}}
     </a>
   </div>
+
+  <a class="btn btn btn-primary mt-4" role="button" routerLink="/user/add">Add new user</a>
 </div>

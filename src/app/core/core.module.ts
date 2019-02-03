@@ -1,24 +1,22 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {HomeComponent} from './components/home/home.component';
 import {HeaderComponent} from './components/header/header.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {CoreRoutingModule} from './core.routing.module';
 import {RouterModule} from '@angular/router';
-import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    DashboardComponent,
+    HomeComponent,
     NotFoundComponent
   ],
   imports: [
     CommonModule,
     CoreRoutingModule,
-    LoggerModule.forRoot({
-      level: NgxLoggerLevel.TRACE
-    })
+    SharedModule
   ],
   exports: [
     RouterModule,

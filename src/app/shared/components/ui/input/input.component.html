@@ -1,15 +1,14 @@
 <div class="form-group row">
   <label
-    [ngClass]="['col-form-label', 'col-' + labelSize, required && !readOnly ? 'required' : '']"
     *ngIf="label"
+    [ngClass]="['col-form-label', 'col-' + labelSize, required && !readOnly ? 'required' : '']"
     [attr.for]="id">
     {{label}}
   </label>
   <div [ngClass]="'col-' + (inputSize === 0 ? (12 - labelSize) : inputSize)">
     <input
       #inputElement
-      [id]="id"
-      [attr.value]="value"
+      [attr.id]="id"
       [attr.type]="type"
       [ngClass]="[readOnly ? 'form-control-plaintext' : 'form-control', showError() ? 'is-invalid' : '']"
       [readOnly]="readOnly"
@@ -17,7 +16,8 @@
       (change)="onChange($event)"
       (keyup)="onKeyup($event)"
       (blur)="onBlur($event)">
-    <div *ngIf="!readOnly && showError() && hasDefinedErrorMessages()" class="invalid-feedback">
+    <div *ngIf="!readOnly && showError() && hasDefinedErrorMessages()"
+         class="invalid-feedback">
       {{getErrorMessage()}}
     </div>
   </div>

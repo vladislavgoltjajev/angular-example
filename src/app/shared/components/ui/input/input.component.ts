@@ -1,4 +1,4 @@
-import {Component, ElementRef, forwardRef, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, forwardRef, Input, OnChanges, OnInit, Renderer2, SimpleChanges, ViewChild} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 import * as _ from 'lodash';
 import {isRequired} from '../../../utility/form-utils';
@@ -13,7 +13,7 @@ import {isRequired} from '../../../utility/form-utils';
     multi: true,
   }]
 })
-export class InputComponent implements OnInit, ControlValueAccessor {
+export class InputComponent implements OnInit, ControlValueAccessor, OnChanges {
 
   @Input() type: string = 'text';
   @Input() label: string = '';
@@ -35,6 +35,16 @@ export class InputComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit(): void {
     this.required = isRequired(this.formControl);
+
+    if (this.value) {
+      this.writeValue(this.value);
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if ('readOnly' in changes) {
+      changes.readOnly.currentValue ? this.formControl.disable() : this.formControl.enable();
+    }
   }
 
   onChange(event: any): void {
@@ -62,17 +72,13 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   }
 
   writeValue(obj: any): void {
-    this.value = obj;
+    this._renderer.setProperty(this._inputElement.nativeElement, 'value', obj);
   }
 
-  private _onChange = (val: any): void => {
-  };
-
-  private _onTouched = (): void => {
-  };
-
   showError(): boolean {
-    return !this.formControl.valid && (this.formControl.dirty || this.formControl.touched);
+    return !this.formControl.disabled
+      && !this.formControl.valid
+      && (this.formControl.dirty || this.formControl.touched);
   }
 
   hasDefinedErrorMessages(): boolean {
@@ -89,4 +95,10 @@ export class InputComponent implements OnInit, ControlValueAccessor {
 
     return '';
   }
+
+  private _onChange = (val: any): void => {
+  };
+
+  private _onTouched = (): void => {
+  };
 }

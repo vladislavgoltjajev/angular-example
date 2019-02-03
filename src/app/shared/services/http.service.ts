@@ -16,8 +16,8 @@ export class HttpService {
   }
 
   get<T>(endpoint: string, queryParams?: object): Observable<T> {
-    const requestType = 'GET';
-    const url = this._getUrl(endpoint);
+    const requestType: string = 'GET';
+    const url: string = this._getUrl(endpoint);
     this._logRequest(requestType, url, queryParams);
     return this._httpClient.get<T>(url, {
       params: this._getQueryParams(queryParams),
@@ -30,8 +30,8 @@ export class HttpService {
   }
 
   post<T>(endpoint: string, body: object): Observable<T> {
-    const requestType = 'POST';
-    const url = this._getUrl(endpoint);
+    const requestType: string = 'POST';
+    const url: string = this._getUrl(endpoint);
     this._logRequest(requestType, url, null, body);
     return this._httpClient.post<T>(url, body, {
       headers: this._getHeaders(),
@@ -43,8 +43,8 @@ export class HttpService {
   }
 
   put<T>(endpoint: string, body: object): Observable<T> {
-    const requestType = 'PUT';
-    const url = this._getUrl(endpoint);
+    const requestType: string = 'PUT';
+    const url: string = this._getUrl(endpoint);
     this._logRequest(requestType, url, null, body);
     return this._httpClient.put<T>(url, body, {
       headers: this._getHeaders(),
@@ -56,8 +56,8 @@ export class HttpService {
   }
 
   delete<T>(endpoint: string, queryParams?: object): Observable<T> {
-    const requestType = 'DELETE';
-    const url = this._getUrl(endpoint);
+    const requestType: string = 'DELETE';
+    const url: string = this._getUrl(endpoint);
     this._logRequest(requestType, url, queryParams);
     return this._httpClient.delete<T>(url, {
       params: this._getQueryParams(queryParams),
@@ -82,7 +82,7 @@ export class HttpService {
   private _handleError(requestType: string, url: string, errorResponse: HttpErrorResponse): Observable<never> {
     const errorMessage: string = errorResponse.message;
     this._logError(requestType, url, errorMessage);
-    return throwError('error');
+    return throwError(errorMessage);
   }
 
   private _getQueryParams(inputParams: object): HttpParams {
@@ -117,7 +117,7 @@ export class HttpService {
   }
 
   private _logRequest(requestType: string, url: string, queryParams?: object, body?: object): void {
-    const message = '\n' + requestType + ' request to ' + url + '\n';
+    const message: string = '\n' + requestType + ' request to ' + url + '\n';
 
     if (!_.isEmpty(queryParams)) {
       this._logger.info(message, queryParams);
